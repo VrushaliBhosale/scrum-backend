@@ -2,16 +2,22 @@ import IssueController from '../controllers/IssueContrroller';
 
 export const type = `
   type Label {
+    id: ID!
     title: String
   }
   type Member {
+    id: ID!
     name: String,
-    email: String
+    email: String,
+    projectId: [ID!],
+    issuesAssigned:[Issue]
   }
   type StatusColumn {
+    id: ID!
     title: String
   }
   type Issue {
+    id: ID!,
     identifireName: String,
     title: String,
     description: String,
@@ -23,27 +29,41 @@ export const type = `
   }
 `
 export const inputs = `
-  type IssueInput {
+  input InputLabel {
+    title: String
+  }
+  input InputMember {
+    name: String,
+    email: String
+  }
+  input InputStatusColumn {
+    title: String
+  }
+  input IssueInput {
     identifireName: String,
     title: String,
     description: String,
-    status: StatusColumn,
+    status: InputStatusColumn,
     priority: String,
     estimate: String,
-    labels: [Label],
-    assignee: Member
+    labels: [InputLabel],
+    assignee: InputMember
   }
 `
 
-export const mutation = `
-  createIssue: Issue
+export const mutation = ` 
+  createIssue(input: IssueInput): Issue
+  updateIssue(id: ID!, input: IssueInput): Issue
 `
 
 export const query = `
   Issues: [Issue]
+  getIssueById(id: ID!): Issue
 `
 
 export const root = {
   Issues: IssueController.getAllIssues,
-  createIssue: IssueController.createIssue
+  createIssue: IssueController.createIssue,
+  getIssueById: IssueController.getIssueByID,
+  updateIssue: IssueController.updateIssue
 }

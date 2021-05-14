@@ -14,18 +14,30 @@ class IssueController{
     })
   }
 
-  public createIssue(args: any,req: express.Request){
-    // if(args){
-      return Issues
-      .create(args)
-      .then(data=>{
-        return data
-      })
-      .catch(err=>{
-        console.log(err)
-      })
-    }
-  // }
+  public createIssue({input},req: express.Request): IntIssue | object {
+    return Issues
+    .create(input)
+    .then(data=>{
+      return data
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+   }
+
+  public getIssueByID({id}, req: express.Request){
+    return Issues
+    .findById(id)
+    .then(data=>{return data})
+    .catch(err=>console.log(err));
+  }
+
+  public updateIssue({id,input}, req){
+    return Issues
+    .findByIdAndUpdate(id,input)
+    .then(data=>{return data})
+    .catch(err=>console.log(err))
+  }
 }
 
 export default new IssueController();

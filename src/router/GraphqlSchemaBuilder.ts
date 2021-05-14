@@ -9,13 +9,14 @@ export default class GraphQLSchemaBuilder{
 
   constructor(){
     this.schema = buildSchema(`
+      ${Issues.inputs}
       type Query {
         ${Issues.query}
       }
-      ${Issues.type}
       type Mutation {
         ${Issues.mutation}
       }
+      ${Issues.type}
     `);
     this.root = Issues.root;
     this.router = server.Router();
