@@ -1,11 +1,10 @@
 import * as express from 'express';
-import Issues,{IntIssue} from '../models/Issue';
+import Label,{ILabel} from '../models/Label';
 
-class IssueController{
-  public getAllIssues(args: any,req: express.Request): Array<IntIssue> | object {
-    return Issues
+class LabelController{
+  public getAllLabels(args: any,req: express.Request): Array<ILabel> | object {
+    return Label
     .find({})
-    .populate("labels")
     .then(data=>{
       return data;
     })
@@ -15,8 +14,8 @@ class IssueController{
     })
   }
 
-  public createIssue({input},req: express.Request): IntIssue | object {
-    return Issues
+  public createLabel({input},req: express.Request): ILabel | object {
+    return Label
     .create(input)
     .then(data=>{
       return data
@@ -26,19 +25,19 @@ class IssueController{
     })
    }
 
-  public getIssueByID({id}, req: express.Request){
-    return Issues
+  public getLabelByID({id}, req: express.Request){
+    return Label
     .findById(id)
     .then(data=>{return data})
     .catch(err=>console.log(err));
   }
 
-  public updateIssue({id,input}, req){
-    return Issues
+  public updateLabel({id,input}, req: express.Request){
+    return Label
     .findByIdAndUpdate(id,input)
     .then(data=>{return data})
     .catch(err=>console.log(err))
   }
 }
 
-export default new IssueController();
+export default new LabelController();

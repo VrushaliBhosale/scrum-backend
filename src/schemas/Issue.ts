@@ -1,10 +1,6 @@
 import IssueController from '../controllers/IssueContrroller';
 
 export const type = `
-  type Label {
-    id: ID!
-    title: String
-  }
   type Member {
     id: ID!
     name: String,
@@ -28,10 +24,7 @@ export const type = `
     assignee: Member
   }
 `
-export const inputs = `
-  input InputLabel {
-    title: String
-  }
+export const input = `
   input InputMember {
     name: String,
     email: String
@@ -46,7 +39,7 @@ export const inputs = `
     status: InputStatusColumn,
     priority: String,
     estimate: String,
-    labels: [InputLabel],
+    labels: [ID],
     assignee: InputMember
   }
 `

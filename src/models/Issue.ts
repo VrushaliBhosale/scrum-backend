@@ -13,7 +13,7 @@ export interface IntIssue extends Document{
   status: Schema.Types.ObjectId;
   priority: String;
   estimate: String;
-  labels: Schema.Types.ObjectId;
+  labels: Array<any>;
   assignee: Schema.Types.ObjectId;
 }
 
@@ -32,7 +32,7 @@ const IssueSchema: Schema = new Schema({
   },
   status: {
     type: Schema.Types.ObjectId,
-    refernce: 'statusColumn',
+    ref: 'statusColumn',
     required: false
   },
   priority: {
@@ -43,14 +43,14 @@ const IssueSchema: Schema = new Schema({
     type: String,
     required: false
   },
-  labels: {
+  labels: [{
     type: Schema.Types.ObjectId,
-    refernce: 'labels',
+    ref: 'label',
     required: false
-  },
+  }],
   assignee: {
     type: Schema.Types.ObjectId,
-    refernce: 'member',
+    ref: 'member',
     required: false
   },
   createdAt: {
@@ -63,4 +63,4 @@ const IssueSchema: Schema = new Schema({
   timestamps: true
 });
 
-export default connections.db.model<IntIssue>('issues',IssueSchema);
+export default connections.db.model<IntIssue>('issue',IssueSchema);

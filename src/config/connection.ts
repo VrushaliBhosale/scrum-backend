@@ -19,7 +19,7 @@ const connectOptions: IConnectOptions = {
 
 // const MONGO_URI: string = `${config.envConfig.database.MONGODB_URI}${config.envConfig.database.MONGODB_DB_MAIN}`;
 
-export const db: mongoose.Connection = mongoose.createConnection("mongodb://localhost:27017/project-tracker",{ useNewUrlParser: true });
+export const db: mongoose.Connection = mongoose.createConnection("mongodb://localhost:27017/project-tracker",{ useNewUrlParser: true, useUnifiedTopology: true });
 
 // handlers
 db.on('connecting', () => {
